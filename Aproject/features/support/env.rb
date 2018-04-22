@@ -21,7 +21,7 @@ elsif OS.linux? || OS.mac?
 end
 
 $contact=$filePath+"\\uploaddata"
-
+puts $contact
 Capybara.default_driver = :selenium
 Capybara.javascript_driver = :selenium
 Capybara.default_max_wait_time = 15
@@ -63,14 +63,18 @@ end
 #<----------------------End of Function---------------------->
 
 #
-workbook = Spreadsheet.open "C:\\Users\\109115\\RubymineProjects\\MessageIt\\Aproject\\features\\support\\uploaddata\\contacts.xls"
+workbook = Spreadsheet.open "#{$contact}\\contacts.xls"
 
-# READ
-
-# Specify a single worksheet by index
-sheet1 = workbook.worksheet 0
-sheet1.each do |row|
-  puts "#{row[0]} - #{row[1]} - #{row[2]}"
+# count = IO.readlines(workbook).count
+# puts count.to_s
+1# Specify a single worksheet by index
+@sheet1 = workbook.worksheet 0
+# puts @sheet1.UsedRange.Rows
+$rowcount= @sheet1.count
+@sheet1.each do |row|
+  @contactno=row[0]
+  @message=row[1]
+  # puts "#{row[0]} - #{row[1]} - #{row[2]}"
 end
 
 =begin

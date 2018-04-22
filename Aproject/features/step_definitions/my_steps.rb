@@ -27,13 +27,37 @@ sleep 5
 end
 
 And(/^I click on the contact no\/name$/) do
-  pending
+sleep 2
+  find(:xpath,"(//span[@title='#{$contactno}'])[1]").click
 end
 
 And(/^I enter the text in message$/) do
-  pending
+  sleep 3
+  # find(:xpath,"//div[text()='Type a message']/..").set 'Trial message'
+  find(:xpath,"//div[@class='_2S1VP copyable-text selectable-text']").set @message
 end
 
 And(/^I click on the submit button$/) do
-  pending
+  find(:xpath,"//span[@data-icon='send']").click
 end
+
+And(/^I click on the new chat menu$/) do
+  find(:xpath,"//div[@title='New chat']").click
+end
+
+And(/^I enter the user name in contacts$/) do
+  find(:xpath,"//input[@title='Search contacts']").set @contactno
+end
+
+And(/^I send message to rest of the contact$/) do
+    for i in 0..$rowcount-1
+step 'I click on the new chat menu'
+step 'I enter the user name in contacts'
+step 'I click on the contact no/name'
+step 'I enter the text in message'
+step 'I click on the submit button'
+      i+1
+    end
+
+
+  end
