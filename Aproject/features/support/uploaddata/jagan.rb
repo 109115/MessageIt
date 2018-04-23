@@ -23,5 +23,5 @@ class Jagan
   end
 end
 
-iniya=Jagan.new
-iniya.jjjj
+#iniya=Jagan.new
+#iniya.jjjj

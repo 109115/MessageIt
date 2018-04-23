@@ -50,14 +50,27 @@ And(/^I enter the user name in contacts$/) do
 end
 
 And(/^I send message to rest of the contact$/) do
-    for i in 0..$rowcount-1
+
+    for i in 1..$rowcount-1
 step 'I click on the new chat menu'
-step 'I enter the user name in contacts'
-step 'I click on the contact no/name'
-step 'I enter the text in message'
+step "I enter the user name \"#{$contactno[i]}\" in search contacts"
+step "I click on the contact no/name \"#{$contactno[i]}\""
+step "I enter the text \"#{$message[i]}\" in message area"
 step 'I click on the submit button'
       i+1
     end
-
-
   end
+
+
+And(/^I enter the user name "([^"]*)" in search contacts$/) do |arg|
+  find(:xpath,"//input[@title='Search contacts']").set arg
+end
+
+And(/^I click on the contact no\/name "([^"]*)"$/) do |arg|
+  sleep 2
+  find(:xpath,"(//span[@title='#{arg}'])[1]").click
+end
+
+And(/^I enter the text "([^"]*)" in message area$/) do |arg|
+  find(:xpath,"//div[@class='_2S1VP copyable-text selectable-text']").set arg
+end

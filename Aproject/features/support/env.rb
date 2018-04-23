@@ -21,7 +21,7 @@ elsif OS.linux? || OS.mac?
 end
 
 $contact=$filePath+"\\uploaddata"
-puts $contact
+# puts $contact
 Capybara.default_driver = :selenium
 Capybara.javascript_driver = :selenium
 Capybara.default_max_wait_time = 15
@@ -64,14 +64,16 @@ end
 
 #
 workbook = Spreadsheet.open "#{$contact}\\contacts.xls"
-
-# count = IO.readlines(workbook).count
-# puts count.to_s
-1# Specify a single worksheet by index
+$contactno=[]
+$message=[]
+# Specify a single worksheet by index
 @sheet1 = workbook.worksheet 0
 # puts @sheet1.UsedRange.Rows
 $rowcount= @sheet1.count
+puts "No of rows in the excel file : #{$rowcount}"
 @sheet1.each do |row|
+  $contactno=$contactno.push row[0]
+  $message=$message.push row[1]
   @contactno=row[0]
   @message=row[1]
   # puts "#{row[0]} - #{row[1]} - #{row[2]}"
