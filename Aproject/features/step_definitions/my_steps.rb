@@ -74,3 +74,35 @@ end
 And(/^I enter the text "([^"]*)" in message area$/) do |arg|
   find(:xpath,"//div[@class='_2S1VP copyable-text selectable-text']").set arg
 end
+
+And(/^I select the first contact and right click on it$/) do
+  first(:xpath,"//div[@class='_2wP_Y']").hover
+  sleep 2
+  first(:xpath,"//div[@class='_2wP_Y']").right_click
+
+end
+
+And(/^I choose "([^"]*)" from the chat right click option$/) do |arg|
+  within (find(:xpath,"//div[@class='_2uLFU']")) do
+    find(:xpath,"//div[@title='#{arg}']").click
+  end
+end
+
+And(/^I confirm the delete by clicking the "([^"]*)" button$/) do |arg|
+  within (find(:xpath,"//div[@class='_1CnF3']"))do
+    find(:xpath,"//div[text()='#{arg}']").click
+  end
+end
+
+
+And(/^I Delete the chat untill last message$/) do
+
+  while all(:xpath,"//div[@class='_2wP_Y']",:visible => true).count != 0
+  # while first(:xpath,"//div[@class='_2wP_Y']").exists?
+    step 'I select the first contact and right click on it'
+    step 'I choose "Delete chat" from the chat right click option'
+    step 'I confirm the delete by clicking the "Delete" button'
+
+  end
+
+end

@@ -1,5 +1,5 @@
 Feature: Login field validation scenarios
-
+  @sendmessage
   Scenario: Send Message
     Given Launch Window
 #    And I click on the new chat menu
