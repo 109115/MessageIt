@@ -1,5 +1,5 @@
 Feature:Delete the Individual chat History
-  @deletechat
+  @deletechat @delete
   Scenario: Delete the chat
     Given Launch Window
 #    And I select the first contact and right click on it
