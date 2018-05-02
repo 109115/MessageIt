@@ -21,6 +21,7 @@ elsif OS.linux? || OS.mac?
 end
 
 $contact=$filePath+"\\uploaddata"
+$notsent=$filePath+"\\uploaddata"
 # puts $contact
 Capybara.default_driver = :selenium
 Capybara.javascript_driver = :selenium
