@@ -42,7 +42,9 @@ And(/^I click on the submit button$/) do
 end
 
 And(/^I click on the new chat menu$/) do
-  find(:xpath,"//div[@title='New chat']").click
+  # find(:xpath,"//div[@title='New chat']").click
+  find(:xpath,"//div[@title='New chat']/..").click
+  # find(:xpath,"//span[@data-icon='chat']/..").click
 end
 
 And(/^I enter the user name in contacts$/) do
@@ -52,6 +54,7 @@ end
 And(/^I send message to rest of the contact$/) do
 
     for i in 1..$rowcount-1
+      sleep 2
 step 'I click on the new chat menu'
 step "I enter the user name \"#{$contactno[i]}\" in search contacts"
 if all(:xpath,"(//span[@title='#{$contactno[i]}'])[1]",:visible=>true).count>=1
@@ -117,13 +120,14 @@ end
 Given(/^I attach the image file and send$/) do
 
   for i in 1..$rowcount-1
+    sleep 1
     step 'I click on the new chat menu'
     step "I enter the user name \"#{$contactno[i]}\" in search contacts"
     if all(:xpath,"(//span[@title='#{$contactno[i]}'])[1]",:visible=>true).count>=1
       step "I click on the contact no/name \"#{$contactno[i]}\""
       find(:xpath,"//div[@title='Attach']").click
       # find(:xpath,"(//button[@class='GK4Lv'])[1]").click #
-      attachmentPath = File.join($notsent,'IOS2.jpeg')
+      attachmentPath = File.join($notsent,'sendimage.jpeg')
       puts attachmentPath.gsub(/\//, "\\")
       Capybara.ignore_hidden_elements = false
       page.execute_script %Q{
